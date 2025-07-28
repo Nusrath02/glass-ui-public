@@ -1,0 +1,2 @@
+# List of patches for glass_ui app
+# Format: module_name.patch_file

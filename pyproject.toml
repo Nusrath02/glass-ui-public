@@ -18,7 +18,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["glass_ui*"]
+include = ["glass_ui", "glass_ui.*"]
 exclude = []
 
 [tool.setuptools.package-data]
