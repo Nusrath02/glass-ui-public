@@ -1,0 +1,25 @@
+[project]
+name = "glass_ui"
+version = "1.0.0"
+description = "Custom Frappe app with glassmorphism UI design"
+authors = [
+    { name = "Your Company", email = "info@yourcompany.com" }
+]
+dependencies = [
+    "frappe",
+]
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["glass_ui*"]
+exclude = []
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.js", "*.css", "*.html", "*.png", "*.jpg", "*.svg", "*.ico", "*.gif"]
