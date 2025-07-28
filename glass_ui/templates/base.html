@@ -1,0 +1,38 @@
+{% extends "templates/web.html" %}
+
+{% block head_include %}
+{{ super() }}
+<style>
+    /* Override base styles for glassmorphism */
+    body {
+        background: var(--bg-gradient) fixed !important;
+        min-height: 100vh;
+    }
+</style>
+{% endblock %}
+
+{% block body_include %}
+{{ super() }}
+<script>
+    // Initialize Glass UI settings from boot info
+    if (window.frappe && window.frappe.boot) {
+        const settings = frappe.boot.glass_ui_settings || {};
+        const theme = frappe.boot.glass_ui_theme || 'light';
+        
+        // Apply theme
+        document.documentElement.setAttribute('data-theme', theme);
+        
+        // Apply settings
+        if (settings.blur_intensity) {
+            document.documentElement.style.setProperty('--glass-blur', `${settings.blur_intensity}px`);
+        }
+        
+        // Store in localStorage for consistency
+        localStorage.setItem('glass-theme', theme);
+        localStorage.setItem('glass-blur', settings.blur_intensity || 10);
+        localStorage.setItem('glass-particles', settings.particles_enabled !== false);
+        localStorage.setItem('glass-animations', settings.animations_enabled !== false);
+        localStorage.setItem('glass-dynamic-bg', settings.dynamic_bg || false);
+    }
+</script>
+{% endblock %}

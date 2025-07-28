@@ -1,0 +1,386 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Glass UI Dashboard{% endblock %}
+
+{% block page_content %}
+<div class="glass-dashboard">
+    <div class="container-fluid">
+        <!-- Dashboard Header -->
+        <div class="glass-dashboard-header">
+            <h1 class="glass-title">Dashboard</h1>
+            <p class="glass-subtitle">Welcome back, {{ frappe.session.user_fullname or frappe.session.user }}</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="glass-widget glass-animate">
+                    <div class="glass-widget__header">
+                        <h3 class="glass-widget__title">Total Sales</h3>
+                        <i class="fas fa-chart-line text-primary"></i>
+                    </div>
+                    <div class="glass-widget__value glass-counter" data-target="12450">0</div>
+                    <div class="glass-widget__trend glass-widget__trend--up">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>12.5% from last month</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="glass-widget glass-animate">
+                    <div class="glass-widget__header">
+                        <h3 class="glass-widget__title">New Customers</h3>
+                        <i class="fas fa-users text-success"></i>
+                    </div>
+                    <div class="glass-widget__value glass-counter" data-target="847">0</div>
+                    <div class="glass-widget__trend glass-widget__trend--up">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>8.2% from last month</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="glass-widget glass-animate">
+                    <div class="glass-widget__header">
+                        <h3 class="glass-widget__title">Active Projects</h3>
+                        <i class="fas fa-project-diagram text-warning"></i>
+                    </div>
+                    <div class="glass-widget__value glass-counter" data-target="23">0</div>
+                    <div class="glass-widget__trend">
+                        <i class="fas fa-minus"></i>
+                        <span>No change</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="glass-widget glass-animate">
+                    <div class="glass-widget__header">
+                        <h3 class="glass-widget__title">Revenue</h3>
+                        <i class="fas fa-dollar-sign text-info"></i>
+                    </div>
+                    <div class="glass-widget__value">$<span class="glass-counter" data-target="95420">0</span></div>
+                    <div class="glass-widget__trend glass-widget__trend--down">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>3.1% from last month</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-8">
+                <div class="glass-card glass-animate">
+                    <h3 class="glass-card-title">Sales Overview</h3>
+                    <div class="glass-chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="glass-card glass-animate">
+                    <h3 class="glass-card-title">Top Products</h3>
+                    <div class="glass-product-list">
+                        <div class="glass-product-item">
+                            <div class="glass-product-info">
+                                <h4>Product A</h4>
+                                <p>245 units sold</p>
+                            </div>
+                            <div class="glass-progress">
+                                <div class="glass-progress__bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="glass-product-item">
+                            <div class="glass-product-info">
+                                <h4>Product B</h4>
+                                <p>189 units sold</p>
+                            </div>
+                            <div class="glass-progress">
+                                <div class="glass-progress__bar" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="glass-product-item">
+                            <div class="glass-product-info">
+                                <h4>Product C</h4>
+                                <p>156 units sold</p>
+                            </div>
+                            <div class="glass-progress">
+                                <div class="glass-progress__bar" style="width: 55%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="glass-card glass-animate">
+                    <h3 class="glass-card-title">Recent Activities</h3>
+                    <div class="glass-activity-list">
+                        <div class="glass-activity-item">
+                            <div class="glass-activity-icon">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <div class="glass-activity-content">
+                                <h4>New invoice created</h4>
+                                <p>Invoice #1234 for Customer XYZ</p>
+                                <span class="glass-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="glass-activity-item">
+                            <div class="glass-activity-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="glass-activity-content">
+                                <h4>New customer registered</h4>
+                                <p>John Doe joined as a new customer</p>
+                                <span class="glass-time">5 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="glass-activity-item">
+                            <div class="glass-activity-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="glass-activity-content">
+                                <h4>Project completed</h4>
+                                <p>Website redesign project marked as complete</p>
+                                <span class="glass-time">1 day ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="glass-card glass-animate">
+                    <h3 class="glass-card-title">Quick Actions</h3>
+                    <div class="glass-action-grid">
+                        <a href="#" class="glass-action-item glass-magnetic">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>New Invoice</span>
+                        </a>
+                        <a href="#" class="glass-action-item glass-magnetic">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Add Customer</span>
+                        </a>
+                        <a href="#" class="glass-action-item glass-magnetic">
+                            <i class="fas fa-box"></i>
+                            <span>New Product</span>
+                        </a>
+                        <a href="#" class="glass-action-item glass-magnetic">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>View Reports</span>
+                        </a>
+                        <a href="#" class="glass-action-item glass-magnetic">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" class="glass-action-item glass-magnetic">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.glass-dashboard {
+    padding: 2rem 0;
+    min-height: calc(100vh - 200px);
+}
+
+.glass-dashboard-header {
+    margin-bottom: 2rem;
+}
+
+.glass-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.glass-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.glass-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.glass-chart-container {
+    height: 300px;
+    position: relative;
+}
+
+.glass-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.glass-product-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.glass-product-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.glass-product-info p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.glass-activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.glass-activity-item {
+    display: flex;
+    gap: 1rem;
+    align-items: start;
+}
+
+.glass-activity-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--glass-bg-hover);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    flex-shrink: 0;
+}
+
+.glass-activity-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem 0;
+}
+
+.glass-activity-content p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.25rem 0;
+}
+
+.glass-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.glass-action-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.glass-action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+    gap: 0.5rem;
+}
+
+.glass-action-item:hover {
+    background: var(--glass-bg-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--glass-shadow);
+    color: var(--text-primary);
+}
+
+.glass-action-item i {
+    font-size: 1.5rem;
+}
+
+.glass-action-item span {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .glass-action-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize sales chart
+    const ctx = document.getElementById('salesChart');
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [12000, 19000, 15000, 25000, 22000, 30000],
+                    borderColor: 'rgba(102, 126, 234, 0.8)',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

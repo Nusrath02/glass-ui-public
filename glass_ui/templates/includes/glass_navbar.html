@@ -1,0 +1,98 @@
+<!-- Glass UI Custom Navbar -->
+<nav class="navbar navbar-expand-lg glass-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <span class="glass-logo">{{ frappe.get_website_settings().brand_html or "Glass UI" }}</span>
+        </a>
+        
+        <button class="navbar-toggler glass-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% for item in top_bar_items %}
+                <li class="nav-item">
+                    <a class="nav-link glass-nav-link" href="{{ item.url }}">
+                        {% if item.icon %}
+                        <i class="{{ item.icon }} me-2"></i>
+                        {% endif %}
+                        {{ item.label }}
+                    </a>
+                </li>
+                {% endfor %}
+                
+                {% if frappe.session.user != 'Guest' %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle glass-nav-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                        <div class="glass-avatar">
+                            {{ frappe.session.user[0].upper() }}
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu glass-dropdown" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="/me">Profile</a></li>
+                        <li><a class="dropdown-item" href="/app">Dashboard</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/api/method/logout">Logout</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link glass-nav-link" href="/login">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+.glass-navbar {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    padding: 1rem 0;
+}
+
+.glass-logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glass-nav-link {
+    color: var(--text-primary) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.glass-nav-link:hover {
+    background: var(--glass-bg-hover);
+    transform: translateY(-2px);
+}
+
+.glass-dropdown {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    margin-top: 0.5rem;
+}
+
+.glass-toggler {
+    border: 1px solid var(--glass-border);
+    padding: 0.25rem 0.5rem;
+}
+
+.glass-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
+}
+</style>

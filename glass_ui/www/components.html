@@ -1,0 +1,300 @@
+{% extends "templates/web.html" %}
+
+{% block title %}Glass UI Components Gallery{% endblock %}
+
+{% block page_content %}
+<div class="glass-components-gallery">
+    <div class="container">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="glass-title">Glass UI Components</h1>
+            <p class="glass-subtitle">Explore our collection of glassmorphism components</p>
+        </div>
+
+        <!-- Buttons Section -->
+        <section class="component-section">
+            <h2 class="section-title">Buttons</h2>
+            <div class="component-showcase glass-card">
+                <div class="component-demo">
+                    <button class="btn btn-primary">Primary Button</button>
+                    <button class="btn btn-secondary">Secondary Button</button>
+                    <button class="btn btn-success">Success Button</button>
+                    <button class="btn btn-danger">Danger Button</button>
+                    <button class="btn btn-warning">Warning Button</button>
+                    <button class="btn btn-info">Info Button</button>
+                </div>
+                <div class="component-code">
+                    <pre><code>&lt;button class="btn btn-primary"&gt;Primary Button&lt;/button&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards Section -->
+        <section class="component-section">
+            <h2 class="section-title">Cards</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card">
+                        <h3>Basic Card</h3>
+                        <p>This is a basic glass card with standard padding and blur effects.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card glass-glow">
+                        <h3>Glow Card</h3>
+                        <p>This card has a glow effect on hover. Move your mouse over it!</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card glass-shimmer">
+                        <h3>Shimmer Card</h3>
+                        <p>This card has an animated shimmer effect.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Elements -->
+        <section class="component-section">
+            <h2 class="section-title">Form Elements</h2>
+            <div class="glass-card">
+                <form>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Text Input</label>
+                            <input type="text" class="form-control" placeholder="Enter text">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Select Dropdown</label>
+                            <select class="form-control">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label">Textarea</label>
+                            <textarea class="form-control" rows="3" placeholder="Enter your message"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="checkbox1">
+                                <label class="form-check-label" for="checkbox1">
+                                    Checkbox option
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radio" id="radio1">
+                                <label class="form-check-label" for="radio1">
+                                    Radio option
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <section class="component-section">
+            <h2 class="section-title">Navigation</h2>
+            <div class="glass-card">
+                <div class="glass-nav">
+                    <a href="#" class="glass-nav__item active">
+                        <i class="fas fa-home me-2"></i> Home
+                    </a>
+                    <a href="#" class="glass-nav__item">
+                        <i class="fas fa-chart-bar me-2"></i> Analytics
+                    </a>
+                    <a href="#" class="glass-nav__item">
+                        <i class="fas fa-users me-2"></i> Customers
+                    </a>
+                    <a href="#" class="glass-nav__item">
+                        <i class="fas fa-cog me-2"></i> Settings
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Badges & Tags -->
+        <section class="component-section">
+            <h2 class="section-title">Badges & Tags</h2>
+            <div class="glass-card">
+                <div class="component-demo">
+                    <span class="glass-badge">Default</span>
+                    <span class="glass-badge glass-badge--primary">Primary</span>
+                    <span class="glass-badge glass-badge--success">Success</span>
+                    <span class="glass-badge glass-badge--warning">Warning</span>
+                    <span class="glass-badge glass-badge--danger">Danger</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Bars -->
+        <section class="component-section">
+            <h2 class="section-title">Progress Bars</h2>
+            <div class="glass-card">
+                <div class="mb-3">
+                    <label>Basic Progress (60%)</label>
+                    <div class="glass-progress">
+                        <div class="glass-progress__bar" style="width: 60%"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Animated Progress (75%)</label>
+                    <div class="glass-progress">
+                        <div class="glass-progress__bar glass-animate-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs -->
+        <section class="component-section">
+            <h2 class="section-title">Tabs</h2>
+            <div class="glass-card">
+                <div class="glass-tabs mb-3">
+                    <button class="glass-tab active">Tab 1</button>
+                    <button class="glass-tab">Tab 2</button>
+                    <button class="glass-tab">Tab 3</button>
+                </div>
+                <div class="tab-content">
+                    <p>This is the content for the active tab. The glass tabs provide a smooth, modern navigation experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Widgets -->
+        <section class="component-section">
+            <h2 class="section-title">Dashboard Widgets</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="glass-widget">
+                        <div class="glass-widget__header">
+                            <h3 class="glass-widget__title">Revenue</h3>
+                            <i class="fas fa-dollar-sign text-success"></i>
+                        </div>
+                        <div class="glass-widget__value">$24,500</div>
+                        <div class="glass-widget__trend glass-widget__trend--up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>12% increase</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-widget">
+                        <div class="glass-widget__header">
+                            <h3 class="glass-widget__title">Users</h3>
+                            <i class="fas fa-users text-primary"></i>
+                        </div>
+                        <div class="glass-widget__value">1,234</div>
+                        <div class="glass-widget__trend glass-widget__trend--up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>5% increase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading States -->
+        <section class="component-section">
+            <h2 class="section-title">Loading States</h2>
+            <div class="glass-card">
+                <div class="component-demo">
+                    <div class="glass-spinner"></div>
+                    <div class="glass-skeleton" style="height: 20px; width: 200px; margin: 20px 0;"></div>
+                    <div class="glass-skeleton" style="height: 20px; width: 150px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Bar -->
+        <section class="component-section">
+            <h2 class="section-title">Search Bar</h2>
+            <div class="glass-card">
+                <div class="glass-search">
+                    <i class="fas fa-search glass-search__icon"></i>
+                    <input type="text" class="glass-search__input" placeholder="Search...">
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<style>
+.glass-components-gallery {
+    padding: 2rem 0;
+    min-height: 100vh;
+}
+
+.component-section {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.component-showcase {
+    padding: 2rem;
+}
+
+.component-demo {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.component-code {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.component-code pre {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.component-code code {
+    color: #f8f8f2;
+    font-size: 0.9rem;
+}
+
+.glass-animate-progress {
+    animation: progress-fill 2s ease-out;
+}
+
+@keyframes progress-fill {
+    from {
+        width: 0;
+    }
+}
+
+.tab-content {
+    padding: 1rem;
+    color: var(--text-secondary);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Tab switching
+    document.querySelectorAll('.glass-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.glass-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+{% endblock %}

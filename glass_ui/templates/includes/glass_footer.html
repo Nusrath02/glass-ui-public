@@ -1,0 +1,115 @@
+<!-- Glass UI Custom Footer -->
+<footer class="glass-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5 class="glass-footer-title">About</h5>
+                <p class="glass-footer-text">
+                    Experience the future of UI design with our glassmorphism-inspired interface.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h5 class="glass-footer-title">Quick Links</h5>
+                <ul class="glass-footer-links">
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5 class="glass-footer-title">Connect</h5>
+                <div class="glass-social-links">
+                    <a href="#" class="glass-social-link" data-glass-tooltip="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="glass-social-link" data-glass-tooltip="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="glass-social-link" data-glass-tooltip="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="glass-footer-bottom">
+            <p>&copy; 2024 {{ frappe.get_website_settings().footer_company_name or "Your Company" }}. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+.glass-footer {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-top: 1px solid var(--glass-border);
+    padding: 3rem 0 1rem;
+    margin-top: 4rem;
+}
+
+.glass-footer-title {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.glass-footer-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.glass-footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.glass-footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.glass-footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.glass-footer-links a:hover {
+    color: var(--text-primary);
+    transform: translateX(5px);
+}
+
+.glass-social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.glass-social-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.glass-social-link:hover {
+    background: var(--glass-bg-hover);
+    color: var(--text-primary);
+    transform: translateY(-3px);
+    box-shadow: var(--glass-shadow);
+}
+
+.glass-footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+</style>
