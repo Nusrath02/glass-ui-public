@@ -1,6 +1,6 @@
 {
-  "glass_ui/public/js/glassmorphism.js": ["public/js/glassmorphism.js"],
-  "glass_ui/public/js/ui-enhancements.js": ["public/js/ui-enhancements.js"],
-  "glass_ui/public/css/glassmorphism.css": ["public/css/glassmorphism.css"],
-  "glass_ui/public/css/components.css": ["public/css/components.css"]
+  "js/glassmorphism": "public/js/glassmorphism.js",
+  "js/ui-enhancements": "public/js/ui-enhancements.js",
+  "css/glassmorphism": "public/css/glassmorphism.css",
+  "css/components": "public/css/components.css"
 }
