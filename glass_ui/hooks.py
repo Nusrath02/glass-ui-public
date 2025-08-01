@@ -32,10 +32,18 @@ web_include_js = [
     "/assets/glass_ui/js/ui-enhancements.js"
 ]
 
-# CRITICAL: Add build configuration for esbuild
+# Force include in all pages - this might be the missing piece
+doctype_js = {"*": ["/assets/glass_ui/js/glassmorphism.js"]}
+doctype_css = {"*": ["/assets/glass_ui/css/glassmorphism.css"]}
+
+# Include in specific pages
+page_js = {"*": "/assets/glass_ui/js/glassmorphism.js"}
+
+# Website theme
+website_theme = "glass_ui"
 website_bundle_sourced = True
 
-# Define build files - this tells esbuild what files to process
+# Build configuration
 build_css_files = {
     "glass_ui.bundle.css": [
         "glass_ui/public/css/glassmorphism.css",
@@ -50,53 +58,46 @@ build_js_files = {
     ]
 }
 
-# Force include in all pages
-doctype_js = {
-    "*": "public/js/glassmorphism.js"
-}
-
-doctype_css = {
-    "*": "public/css/glassmorphism.css"
-}
-
-# Website theme
-website_theme = "glass_ui"
-
 # Boot Session
-# -------------
 boot_session = "glass_ui.api.boot_session"
 
-# Fixtures
-# --------
-fixtures = [
-    {
-        "dt": "Custom Field",
-        "filters": [["module", "=", "Glass UI"]]
-    },
-    {
-        "dt": "Property Setter",
-        "filters": [["module", "=", "Glass UI"]]
+# Installation
+before_install = "glass_ui.install.before_install"
+after_install = "glass_ui.install.after_install"
+
+# Required apps
+required_apps = ["frappe"]
+
+# Document Events - Apply to all doctypes
+doc_events = {
+    "*": {
+        "on_update": "glass_ui.utils.apply_glass_effects"
     }
-]
+}
 
 # Website Context
-# ---------------
 website_context = {
     "favicon": "/assets/glass_ui/images/favicon.ico",
     "splash_image": "/assets/glass_ui/images/splash.png"
 }
 
-# Installation
-# ------------
-before_install = "glass_ui.install.before_install"
-after_install = "glass_ui.install.after_install"
+# Fixtures
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [["module", "=", "Glass UI"]]
+    }
+]
 
-# Required for Frappe Cloud deployment
-required_apps = ["frappe"]
+# Override template
+override_doctype_class = {
+    "*": "glass_ui.overrides.GlassDocType"
+}
 
-# Jinja methods for template access
+# Jinja methods
 jinja = {
     "methods": [
-        "glass_ui.utils.get_glass_theme"
+        "glass_ui.utils.get_glass_theme",
+        "glass_ui.utils.include_glass_assets"
     ]
 }
