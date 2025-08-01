@@ -7,43 +7,52 @@ app_description = "Custom Frappe app with glassmorphism UI design"
 app_email = "info@yourcompany.com"
 app_license = "MIT"
 
-# Includes in <head>
+# Required apps
+required_apps = ["frappe"]
+
+# Includes in <head> - Fixed paths for Frappe Cloud
 # ------------------
 
-# include js, css files in header of desk.html
+# CSS files for desk (admin interface)
 app_include_css = [
     "/assets/glass_ui/css/glassmorphism.css",
     "/assets/glass_ui/css/components.css"
 ]
 
+# JS files for desk (admin interface)
 app_include_js = [
     "/assets/glass_ui/js/glassmorphism.js",
     "/assets/glass_ui/js/ui-enhancements.js"
 ]
 
-# include js, css files in header of web template
+# CSS files for website (public pages)
 web_include_css = [
     "/assets/glass_ui/css/glassmorphism.css",
     "/assets/glass_ui/css/components.css"
 ]
 
+# JS files for website (public pages)
 web_include_js = [
     "/assets/glass_ui/js/glassmorphism.js",
     "/assets/glass_ui/js/ui-enhancements.js"
 ]
 
-# Force include in all pages - this might be the missing piece
-doctype_js = {"*": ["/assets/glass_ui/js/glassmorphism.js"]}
-doctype_css = {"*": ["/assets/glass_ui/css/glassmorphism.css"]}
+# Force include in all doctypes - This ensures your styles load everywhere
+doctype_css = {
+    "*": [
+        "/assets/glass_ui/css/glassmorphism.css",
+        "/assets/glass_ui/css/components.css"
+    ]
+}
 
-# Include in specific pages
-page_js = {"*": "/assets/glass_ui/js/glassmorphism.js"}
+doctype_js = {
+    "*": [
+        "/assets/glass_ui/js/glassmorphism.js",
+        "/assets/glass_ui/js/ui-enhancements.js"
+    ]
+}
 
-# Website theme
-website_theme = "glass_ui"
-website_bundle_sourced = True
-
-# Build configuration
+# Build configuration for production
 build_css_files = {
     "glass_ui.bundle.css": [
         "glass_ui/public/css/glassmorphism.css",
@@ -58,46 +67,67 @@ build_js_files = {
     ]
 }
 
-# Boot Session
-boot_session = "glass_ui.api.boot_session"
+# Website theme configuration
+website_theme = "glass_ui"
 
-# Installation
-before_install = "glass_ui.install.before_install"
-after_install = "glass_ui.install.after_install"
-
-# Required apps
-required_apps = ["frappe"]
-
-# Document Events - Apply to all doctypes
-doc_events = {
-    "*": {
-        "on_update": "glass_ui.utils.apply_glass_effects"
-    }
-}
-
-# Website Context
-website_context = {
-    "favicon": "/assets/glass_ui/images/favicon.ico",
-    "splash_image": "/assets/glass_ui/images/splash.png"
-}
-
-# Fixtures
+# Fixtures for custom fields
 fixtures = [
     {
-        "dt": "Custom Field",
+        "dt": "Custom Field", 
+        "filters": [["module", "=", "Glass UI"]]
+    },
+    {
+        "dt": "Property Setter",
         "filters": [["module", "=", "Glass UI"]]
     }
 ]
 
-# Override template
-override_doctype_class = {
-    "*": "glass_ui.overrides.GlassDocType"
+# Boot session to inject custom data
+boot_session = "glass_ui.boot.get_bootinfo"
+
+# Website context
+website_context = {
+    "favicon": "/assets/glass_ui/images/favicon.ico",
+    "splash_image": "/assets/glass_ui/images/splash.png",
+    "disable_signup": 0
 }
 
-# Jinja methods
+# Override standard templates if needed
+# override_whitelisted_methods = {
+#     "frappe.desk.desktop.get_desktop_page": "glass_ui.overrides.get_desktop_page"
+# }
+
+# Document Events
+doc_events = {
+    "*": {
+        "validate": "glass_ui.utils.validate_doc",
+        "on_update": "glass_ui.utils.on_doc_update"
+    }
+}
+
+# Jinja template methods
 jinja = {
     "methods": [
-        "glass_ui.utils.get_glass_theme",
-        "glass_ui.utils.include_glass_assets"
+        "glass_ui.utils.get_glass_theme_data",
+        "glass_ui.utils.get_user_theme_preference"
     ]
 }
+
+# Install hooks
+before_install = "glass_ui.install.before_install"
+after_install = "glass_ui.install.after_install"
+
+# Scheduler Events (optional)
+# scheduler_events = {
+#     "daily": [
+#         "glass_ui.tasks.daily_cleanup"
+#     ]
+# }
+
+# Override doctype class (use with caution)
+# override_doctype_class = {
+#     "User": "glass_ui.overrides.CustomUser"
+# }
+
+# Translation
+# translate_in_build = True
