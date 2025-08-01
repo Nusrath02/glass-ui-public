@@ -3,7 +3,7 @@ from frappe import _
 def get_data():
     return [
         {
-            "label": _("Glass UI"),
+            "label": _("Glassn"),
             "icon": "fa fa-palette",
             "items": [
                 {
