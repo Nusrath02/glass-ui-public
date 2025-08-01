@@ -1,401 +1,223 @@
-// Glass UI - UI Enhancements and Animations
+// Glass UI - Force UI Enhancements Loading
 
+// Force immediate execution
 (function() {
     'use strict';
-
-    // Advanced UI enhancements
-    const UIEnhancements = {
-        init() {
-            this.initAdvancedAnimations();
-            this.initDynamicBackgrounds();
-            this.initInteractiveElements();
-            this.initCustomCharts();
-            this.initPageTransitions();
-            this.initCustomCursors();
-            this.initMagneticButtons();
-        },
-
-        // Advanced animations
-        initAdvancedAnimations() {
-            // Parallax scrolling for glass elements
-            let ticking = false;
-            function updateParallax() {
-                const scrolled = window.pageYOffset;
-                const parallaxElements = document.querySelectorAll('.glass-parallax');
-                
-                parallaxElements.forEach(element => {
-                    const speed = element.dataset.parallaxSpeed || 0.5;
-                    const yPos = -(scrolled * speed);
-                    element.style.transform = `translateY(${yPos}px)`;
-                });
-                
-                ticking = false;
+    
+    console.log('Glass UI - Force loading started');
+    
+    // Force apply styles immediately
+    function forceApplyGlassStyles() {
+        // Create and inject critical CSS
+        const criticalCSS = `
+            body {
+                background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%) !important;
+                background-attachment: fixed !important;
+                min-height: 100vh !important;
             }
             
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateParallax);
-                    ticking = true;
-                }
-            });
-
-            // Stagger animations for lists
-            const animateLists = () => {
-                document.querySelectorAll('.glass-stagger-list').forEach(list => {
-                    const items = list.querySelectorAll('.glass-stagger-item');
-                    items.forEach((item, index) => {
-                        item.style.animationDelay = `${index * 0.1}s`;
-                        item.classList.add('glass-fade-in-up');
-                    });
-                });
-            };
+            .container, .layout-main-section, .page-container {
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                border-radius: 12px !important;
+                margin: 10px !important;
+            }
             
-            if (window.frappe) {
-                frappe.router.on('change', animateLists);
+            .navbar, .navbar-default {
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
             }
-            animateLists();
-        },
-
-        // Dynamic gradient backgrounds
-        initDynamicBackgrounds() {
-            const gradientBg = document.createElement('div');
-            gradientBg.className = 'glass-gradient-bg';
-            gradientBg.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 0;
-                opacity: 0.5;
-            `;
             
-            // Animated gradient
-            const animateGradient = () => {
-                const time = Date.now() * 0.001;
-                const color1 = `hsl(${Math.sin(time) * 60 + 200}, 70%, 50%)`;
-                const color2 = `hsl(${Math.sin(time + 2) * 60 + 250}, 70%, 50%)`;
-                const color3 = `hsl(${Math.sin(time + 4) * 60 + 300}, 70%, 50%)`;
-                
-                gradientBg.style.background = `
-                    radial-gradient(circle at 20% 50%, ${color1} 0%, transparent 50%),
-                    radial-gradient(circle at 80% 80%, ${color2} 0%, transparent 50%),
-                    radial-gradient(circle at 40% 20%, ${color3} 0%, transparent 50%)
-                `;
-                
-                requestAnimationFrame(animateGradient);
-            };
+            .card, .widget, .form-section {
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                border-radius: 12px !important;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+                color: rgba(255, 255, 255, 0.95) !important;
+            }
             
-            if (localStorage.getItem('glass-dynamic-bg') !== 'false') {
-                document.body.appendChild(gradientBg);
-                animateGradient();
+            .form-control, input, select, textarea {
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(5px) !important;
+                -webkit-backdrop-filter: blur(5px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                color: rgba(255, 255, 255, 0.95) !important;
+                border-radius: 8px !important;
             }
-        },
-
-        // Interactive hover effects
-        initInteractiveElements() {
-            // Magnetic hover effect
-            document.querySelectorAll('.glass-magnetic').forEach(element => {
-                element.addEventListener('mousemove', (e) => {
-                    const rect = element.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    
-                    element.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-                });
-                
-                element.addEventListener('mouseleave', () => {
-                    element.style.transform = '';
-                });
-            });
-
-            // Glow effect on hover
-            document.querySelectorAll('.glass-glow').forEach(element => {
-                element.addEventListener('mousemove', (e) => {
-                    const rect = element.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    element.style.setProperty('--glow-x', `${x}px`);
-                    element.style.setProperty('--glow-y', `${y}px`);
-                });
-            });
-        },
-
-        // Custom chart animations
-        initCustomCharts() {
-            // Animate chart values
-            const animateValue = (element, start, end, duration) => {
-                const startTime = performance.now();
-                
-                const updateValue = (currentTime) => {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    
-                    // Easing function
-                    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                    const current = start + (end - start) * easeOutQuart;
-                    
-                    element.textContent = Math.round(current);
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(updateValue);
-                    }
-                };
-                
-                requestAnimationFrame(updateValue);
-            };
-
-            // Initialize counters
-            const observerOptions = {
-                threshold: 0.5,
-                rootMargin: '0px'
-            };
-
-            const counterObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-                        const target = parseInt(entry.target.dataset.target) || 100;
-                        animateValue(entry.target, 0, target, 2000);
-                        entry.target.classList.add('animated');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.glass-counter').forEach(counter => {
-                counterObserver.observe(counter);
-            });
-        },
-
-        // Page transitions
-        initPageTransitions() {
-            if (!window.frappe) return;
-
-            const transitionOverlay = document.createElement('div');
-            transitionOverlay.className = 'glass-transition-overlay';
-            transitionOverlay.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: var(--glass-bg);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                z-index: 9999;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s ease;
-            `;
-            document.body.appendChild(transitionOverlay);
-
-            frappe.router.on('before-change', () => {
-                transitionOverlay.style.opacity = '1';
-                transitionOverlay.style.pointerEvents = 'all';
-            });
-
-            frappe.router.on('change', () => {
-                setTimeout(() => {
-                    transitionOverlay.style.opacity = '0';
-                    transitionOverlay.style.pointerEvents = 'none';
-                }, 100);
-            });
-        },
-
-        // Custom cursor effects
-        initCustomCursors() {
-            if (window.innerWidth < 768) return; // Disable on mobile
-
-            const cursor = document.createElement('div');
-            cursor.className = 'glass-cursor';
-            cursor.style.cssText = `
-                position: fixed;
-                width: 20px;
-                height: 20px;
-                border: 2px solid var(--glass-border);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 10000;
-                transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
-                backdrop-filter: blur(5px);
-                -webkit-backdrop-filter: blur(5px);
-                display: none;
-            `;
-            document.body.appendChild(cursor);
-
-            let mouseX = 0, mouseY = 0;
-            let cursorX = 0, cursorY = 0;
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                cursor.style.display = 'block';
-            });
-
-            // Smooth cursor movement
-            const animateCursor = () => {
-                const dx = mouseX - cursorX;
-                const dy = mouseY - cursorY;
-                
-                cursorX += dx * 0.1;
-                cursorY += dy * 0.1;
-                
-                cursor.style.left = cursorX - 10 + 'px';
-                cursor.style.top = cursorY - 10 + 'px';
-                
-                requestAnimationFrame(animateCursor);
-            };
-            animateCursor();
-
-            // Cursor interactions
-            document.querySelectorAll('a, button, .clickable').forEach(element => {
-                element.addEventListener('mouseenter', () => {
-                    cursor.style.width = '40px';
-                    cursor.style.height = '40px';
-                    cursor.style.transform = 'translate(-10px, -10px)';
-                });
-                
-                element.addEventListener('mouseleave', () => {
-                    cursor.style.width = '20px';
-                    cursor.style.height = '20px';
-                    cursor.style.transform = 'translate(0, 0)';
-                });
-            });
-        },
-
-        // Magnetic buttons
-        initMagneticButtons() {
-            document.querySelectorAll('.glass-magnetic-btn').forEach(button => {
-                button.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    
-                    this.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-                    this.querySelector('span').style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
-                });
-                
-                button.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                    this.querySelector('span').style.transform = '';
-                });
-            });
-        }
-    };
-
-    // Utility functions
-    const Utils = {
-        // Debounce function
-        debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        },
-
-        // Throttle function
-        throttle(func, limit) {
-            let inThrottle;
-            return function(...args) {
-                if (!inThrottle) {
-                    func.apply(this, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            };
-        }
-    };
-
-    // Custom animations CSS
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes glass-fade-in-up {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+            
+            .btn {
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                color: rgba(255, 255, 255, 0.95) !important;
+                border-radius: 8px !important;
+                transition: all 0.3s ease !important;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .btn:hover {
+                background: rgba(255, 255, 255, 0.15) !important;
+                transform: translateY(-2px) !important;
+                box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.45) !important;
             }
-        }
-        
-        .glass-fade-in-up {
-            animation: glass-fade-in-up 0.6s ease forwards;
-        }
-        
-        @keyframes glass-pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
+            
+            body, .text-muted, .control-label, label {
+                color: rgba(255, 255, 255, 0.95) !important;
             }
-            50% {
-                transform: scale(1.05);
-                opacity: 0.8;
-            }
+        `;
+        
+        // Remove existing glass styles
+        const existingGlassStyle = document.getElementById('glass-ui-force-styles');
+        if (existingGlassStyle) {
+            existingGlassStyle.remove();
         }
         
-        .glass-pulse {
-            animation: glass-pulse 2s ease infinite;
-        }
+        // Inject new styles
+        const styleElement = document.createElement('style');
+        styleElement.id = 'glass-ui-force-styles';
+        styleElement.textContent = criticalCSS;
+        document.head.appendChild(styleElement);
         
-        .glass-glow {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .glass-glow::before {
-            content: '';
-            position: absolute;
-            top: var(--glow-y, 50%);
-            left: var(--glow-x, 50%);
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .glass-glow:hover::before {
-            opacity: 1;
-        }
-        
-        .glass-magnetic-btn {
-            position: relative;
-            transition: transform 0.2s ease;
-        }
-        
-        .glass-magnetic-btn span {
-            display: block;
-            transition: transform 0.2s ease;
-        }
-    `;
-    document.head.appendChild(style);
-
-    // Initialize enhancements
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => UIEnhancements.init());
-    } else {
-        UIEnhancements.init();
+        console.log('Glass UI - Critical styles injected');
     }
-
-    // Re-initialize on route change
-    if (window.frappe) {
+    
+    // Force apply to existing elements
+    function forceApplyToElements() {
+        // Apply to all existing elements
+        document.querySelectorAll('.container, .layout-main-section, .page-container').forEach(el => {
+            el.style.cssText += `
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                border-radius: 12px !important;
+                margin: 10px !important;
+            `;
+        });
+        
+        document.querySelectorAll('.navbar, .navbar-default').forEach(el => {
+            el.style.cssText += `
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+            `;
+        });
+        
+        document.querySelectorAll('.card, .widget, .form-section').forEach(el => {
+            el.style.cssText += `
+                background: rgba(255, 255, 255, 0.1) !important;
+                backdrop-filter: blur(10px) !important;
+                -webkit-backdrop-filter: blur(10px) !important;
+                border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                border-radius: 12px !important;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+                color: rgba(255, 255, 255, 0.95) !important;
+            `;
+        });
+        
+        console.log('Glass UI - Styles applied to existing elements');
+    }
+    
+    // Create animated background
+    function createAnimatedBackground() {
+        // Set body background
+        document.body.style.cssText += `
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%) !important;
+            background-attachment: fixed !important;
+            min-height: 100vh !important;
+        `;
+        
+        // Create pattern overlay
+        const patternOverlay = document.createElement('div');
+        patternOverlay.style.cssText = `
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 219, 112, 0.2) 0%, transparent 50%) !important;
+            pointer-events: none !important;
+            z-index: -1 !important;
+        `;
+        
+        // Remove existing overlay
+        const existingOverlay = document.getElementById('glass-ui-pattern-overlay');
+        if (existingOverlay) {
+            existingOverlay.remove();
+        }
+        
+        patternOverlay.id = 'glass-ui-pattern-overlay';
+        document.body.appendChild(patternOverlay);
+        
+        console.log('Glass UI - Animated background created');
+    }
+    
+    // Initialize everything
+    function initializeGlassUI() {
+        console.log('Glass UI - Initializing...');
+        
+        // Apply styles immediately
+        forceApplyGlassStyles();
+        
+        // Create background
+        createAnimatedBackground();
+        
+        // Apply to existing elements
+        forceApplyToElements();
+        
+        // Set up mutation observer to catch dynamic content
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.addedNodes.length > 0) {
+                    setTimeout(() => {
+                        forceApplyToElements();
+                    }, 100);
+                }
+            });
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+        
+        console.log('Glass UI - Initialization complete');
+    }
+    
+    // Execute immediately and on DOM ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeGlassUI);
+    } else {
+        initializeGlassUI();
+    }
+    
+    // Also execute on window load
+    window.addEventListener('load', () => {
+        setTimeout(initializeGlassUI, 500);
+    });
+    
+    // For Frappe route changes
+    if (window.frappe && frappe.router) {
         frappe.router.on('change', () => {
-            setTimeout(() => UIEnhancements.init(), 100);
+            setTimeout(initializeGlassUI, 200);
         });
     }
-
-    // Expose to global scope
-    window.GlassUIEnhancements = UIEnhancements;
-    window.GlassUIUtils = Utils;
-
+    
+    // Add to window for manual triggering
+    window.forceGlassUI = initializeGlassUI;
+    
+    console.log('Glass UI - Force enhancement script loaded');
+    
 })();
