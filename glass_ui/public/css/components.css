@@ -1,164 +1,346 @@
-/* Glass UI - Component Styles - Force Loading */
+/* Glass UI Components - Additional Enhancements */
 
-/* Force override Frappe's default styles with higher specificity */
-html body.logged-in {
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%) !important;
-  background-attachment: fixed !important;
-  min-height: 100vh !important;
+/* Custom Glass Components */
+.glass-widget {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--glass-shadow);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
-/* Force glass effect on main containers */
-html body .container,
-html body .layout-main-section,
-html body .page-container {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 12px !important;
-  margin: 10px !important;
+.glass-widget:hover {
+  background: var(--glass-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--glass-shadow-hover);
 }
 
-/* Force navbar styling */
-html body .navbar,
-html body .navbar-default {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+/* Enhanced List Items */
+.glass-list-item {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
 }
 
-/* Force sidebar styling */
-html body .layout-side-section,
-html body .sidebar {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+.glass-list-item:hover {
+  background: var(--glass-bg-hover);
+  transform: translateX(4px);
+  box-shadow: var(--glass-shadow);
 }
 
-/* Force card styling */
-html body .card,
-html body .widget,
-html body .form-section {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-  color: rgba(255, 255, 255, 0.95) !important;
+/* Glass Tooltip */
+.glass-tooltip {
+  position: absolute;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  pointer-events: none;
 }
 
-/* Force input styling */
-html body .form-control,
-html body input,
-html body select,
-html body textarea {
-  background: rgba(255, 255, 255, 0.1) !important;
+.glass-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.glass-tooltip::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--glass-border);
+}
+
+/* Glass Alert/Notification */
+.glass-alert {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.glass-alert.alert-success {
+  border-color: rgba(72, 187, 120, 0.4);
+  background: rgba(72, 187, 120, 0.1);
+}
+
+.glass-alert.alert-warning {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.glass-alert.alert-danger {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.glass-alert.alert-info {
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* Enhanced Form Layouts */
+.glass-form-section {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.glass-form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.glass-form-group label {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  background: transparent;
+  padding: 0 0.25rem;
+}
+
+.glass-form-group input:focus + label,
+.glass-form-group input:not(:placeholder-shown) + label,
+.glass-form-group.has-value label {
+  transform: translateY(-1.5rem) scale(0.8);
+  color: var(--text-primary);
+}
+
+/* Glass Badge */
+.glass-badge {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  display: inline-block;
+}
+
+.glass-badge.badge-primary {
+  background: rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.4);
+}
+
+.glass-badge.badge-success {
+  background: rgba(72, 187, 120, 0.2);
+  border-color: rgba(72, 187, 120, 0.4);
+}
+
+.glass-badge.badge-warning {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.glass-badge.badge-danger {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* Glass Progress Bar */
+.glass-progress {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  height: 1rem;
+  overflow: hidden;
+}
+
+.glass-progress-bar {
+  background: var(--primary-gradient);
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 6px;
+}
+
+/* Glass Tab Navigation */
+.glass-nav-tabs {
+  border-bottom: 1px solid var(--glass-border);
+  margin-bottom: 1rem;
+}
+
+.glass-nav-tabs .nav-link {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  border-radius: 8px 8px 0 0;
+  transition: all 0.3s ease;
+}
+
+.glass-nav-tabs .nav-link:hover {
+  background: var(--glass-bg);
+  color: var(--text-primary);
+}
+
+.glass-nav-tabs .nav-link.active {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border-color: var(--glass-border);
+  color: var(--text-primary);
+}
+
+/* Glass Accordion */
+.glass-accordion {
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.glass-accordion-item {
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-accordion-item:last-child {
+  border-bottom: none;
+}
+
+.glass-accordion-header {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.glass-accordion-header:hover {
+  background: var(--glass-bg-hover);
+}
+
+.glass-accordion-body {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Specific Frappe Component Enhancements */
+.frappe-control input,
+.frappe-control select,
+.frappe-control textarea {
+  background: var(--glass-bg) !important;
   backdrop-filter: blur(5px) !important;
-  -webkit-backdrop-filter: blur(5px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: rgba(255, 255, 255, 0.95) !important;
-  border-radius: 8px !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--text-primary) !important;
 }
 
-/* Force button styling */
-html body .btn {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: rgba(255, 255, 255, 0.95) !important;
-  border-radius: 8px !important;
-  transition: all 0.3s ease !important;
+.frappe-control .control-label {
+  color: var(--text-primary) !important;
 }
 
-html body .btn:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 40px 0 rgba(31, 38, 135, 0.45) !important;
+.frappe-control .help-box {
+  color: var(--text-secondary) !important;
 }
 
-/* Force primary button colors */
-html body .btn-primary {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3)) !important;
-  border-color: rgba(102, 126, 234, 0.4) !important;
+/* Enhanced Sidebar */
+.desk-sidebar .sidebar-item {
+  border-radius: 6px;
+  margin: 0.25rem 0.5rem;
+  transition: all 0.3s ease;
 }
 
-html body .btn-primary:hover {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4)) !important;
-  border-color: rgba(102, 126, 234, 0.5) !important;
+.desk-sidebar .sidebar-item:hover {
+  background: var(--glass-bg-hover) !important;
+  transform: translateX(4px);
 }
 
-/* Force text colors */
-html body,
-html body .text-muted,
-html body .control-label,
-html body label {
-  color: rgba(255, 255, 255, 0.95) !important;
+.desk-sidebar .sidebar-item.selected {
+  background: var(--glass-bg-hover) !important;
+  border-left: 3px solid rgba(102, 126, 234, 0.6);
 }
 
-/* Force table styling */
-html body .table {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: rgba(255, 255, 255, 0.95) !important;
+/* Enhanced Navbar */
+.navbar .navbar-nav .nav-link {
+  border-radius: 6px;
+  margin: 0 0.25rem;
+  transition: all 0.3s ease;
 }
 
-html body .table thead th {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
-  color: rgba(255, 255, 255, 0.95) !important;
+.navbar .navbar-nav .nav-link:hover {
+  background: var(--glass-bg-hover) !important;
+  transform: translateY(-1px);
 }
 
-html body .table tbody tr {
-  border-color: rgba(255, 255, 255, 0.2) !important;
+/* Loading Animation */
+.glass-loading {
+  position: relative;
+  overflow: hidden;
 }
 
-html body .table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
+.glass-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: glass-shimmer 2s infinite;
 }
 
-/* Force modal styling */
-html body .modal-content {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+@keyframes glass-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
-/* Force dropdown styling */
-html body .dropdown-menu {
-  background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .glass-widget {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  
+  .glass-form-section {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .glass-form-group {
+    margin-bottom: 1rem;
+  }
 }
 
-html body .dropdown-item {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-html body .dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-/* Animated background pattern */
-html body::before {
-  content: '' !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 40% 20%, rgba(255, 219, 112, 0.2) 0%, transparent 50%) !important;
-  pointer-events: none !important;
-  z-index: -1 !important;
+/* Print styles */
+@media print {
+  .glass-particles,
+  .glass-tooltip {
+    display: none !important;
+  }
+  
+  .glass-widget,
+  .glass-form-section {
+    background: white !important;
+    backdrop-filter: none !important;
+    border: 1px solid #ccc !important;
+    color: black !important;
+  }
 }
