@@ -238,3 +238,124 @@ frappe.ready(function() {
             subtree: true
         });
     };
+    
+    // Theme switching functionality
+    GlassUI.setTheme = function(theme) {
+        this.config.theme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        
+        // Store preference
+        if (frappe && frappe.call) {
+            frappe.call({
+                method: 'glass_ui.utils.set_user_theme_preference',
+                args: { theme: theme }
+            });
+        }
+    };
+    
+    // Toggle particles
+    GlassUI.toggleParticles = function(enabled) {
+        this.config.particlesEnabled = enabled;
+        
+        if (enabled) {
+            this.initParticles();
+        } else {
+            const particles = document.querySelector('.glass-particles');
+            if (particles) particles.remove();
+        }
+    };
+    
+    // Notification system
+    GlassUI.notify = function(title, message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `glass-notification glass-notification--${type}`;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            color: rgba(255, 255, 255, 0.95);
+            z-index: 10000;
+            min-width: 300px;
+            animation: slide-in 0.3s ease;
+        `;
+        
+        notification.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: 4px;">${title}</div>
+            <div style="font-size: 14px; opacity: 0.8;">${message}</div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            notification.style.animation = 'slide-out 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 5000);
+        
+        // Add animation styles if not exists
+        if (!document.getElementById('notification-animations')) {
+            const style = document.createElement('style');
+            style.id = 'notification-animations';
+            style.textContent = `
+                @keyframes slide-in {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                
+                @keyframes slide-out {
+                    to {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    };
+    
+    // Initialize Glass UI
+    GlassUI.init();
+    
+    // Hook into Frappe events
+    if (window.frappe) {
+        // Re-initialize on route changes
+        frappe.router.on('change', () => {
+            setTimeout(() => {
+                GlassUI.applyGlassEffects();
+                GlassUI.initEnhancements();
+            }, 200);
+        });
+        
+        // Initialize after page load
+        $(document).on('page-change', function() {
+            setTimeout(() => {
+                GlassUI.applyGlassEffects();
+                GlassUI.initEnhancements();
+            }, 300);
+        });
+        
+        // Hook into form loading
+        frappe.ui.form.on('refresh', function() {
+            setTimeout(() => {
+                GlassUI.applyGlassEffects();
+                GlassUI.initEnhancements();
+            }, 100);
+        });
+    }
+    
+    // Expose Glass UI globally
+    window.GlassUI = GlassUI;
+    
+    console.log('Glass UI: Setup complete');
+});
