@@ -32,181 +32,42 @@ web_include_js = [
     "/assets/glass_ui/js/ui-enhancements.js"
 ]
 
-# include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "glass_ui/public/scss/website"
+# CRITICAL: Add build configuration for esbuild
+website_bundle_sourced = True
 
-# include js in page
-# page_js = {"page" : "public/js/file.js"}
+# Define build files - this tells esbuild what files to process
+build_css_files = {
+    "glass_ui.bundle.css": [
+        "glass_ui/public/css/glassmorphism.css",
+        "glass_ui/public/css/components.css"
+    ]
+}
 
-# include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+build_js_files = {
+    "glass_ui.bundle.js": [
+        "glass_ui/public/js/glassmorphism.js",
+        "glass_ui/public/js/ui-enhancements.js"
+    ]
+}
 
-# Home Pages
-# ----------
+# Force include in all pages
+doctype_js = {
+    "*": "public/js/glassmorphism.js"
+}
 
-# application home page (will override Website Settings)
-# home_page = "login"
+doctype_css = {
+    "*": "public/css/glassmorphism.css"
+}
 
-# website user home page (by Role)
-# role_home_page = {
-#	"Role": "home_page"
-# }
-
-# Generators
-# ----------
-
-# automatically create page for each record of this doctype
-# website_generators = ["Web Page"]
-
-# Jinja
-# ----------
-
-# add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "glass_ui.utils.jinja_methods",
-# 	"filters": "glass_ui.utils.jinja_filters"
-# }
-
-# Installation
-# ------------
-
-# before_install = "glass_ui.install.before_install"
-# after_install = "glass_ui.install.after_install"
-
-# Desk Notifications
-# ------------------
-# See frappe.core.notifications.get_notification_config
-
-# notification_config = "glass_ui.notifications.get_notification_config"
-
-# Permissions
-# -----------
-# Permissions evaluated in scripted ways
-
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
-
-# DocType Class
-# ---------------
-# Override standard doctype classes
-
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
-
-# Document Events
-# ---------------
-# Hook on document methods and events
-
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
-
-# Scheduled Tasks
-# ---------------
-
-# scheduler_events = {
-# 	"all": [
-# 		"glass_ui.tasks.all"
-# 	],
-# 	"daily": [
-# 		"glass_ui.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"glass_ui.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"glass_ui.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"glass_ui.tasks.monthly"
-# 	]
-# }
-
-# Testing
-# -------
-
-# before_tests = "glass_ui.install.before_tests"
-
-# Overriding Methods
-# ------------------------------
-#
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "glass_ui.event.get_events"
-# }
-#
-# each overriding function accepts a `data` argument;
-# generated from the base implementation of the doctype dashboard,
-# along with any modifications made in other Frappe apps
-# override_doctype_dashboards = {
-# 	"Task": "glass_ui.task.get_dashboard_data"
-# }
-
-# exempt linked doctypes from being automatically cancelled
-#
-# auto_cancel_exempted_doctypes = ["Auto Repeat"]
-
-# User Data Protection
-# --------------------
-
-# user_data_fields = [
-# 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_3}",
-# 		"strict": False,
-# 	},
-# 	{
-# 		"doctype": "{doctype_4}"
-# 	}
-# ]
-
-# Authentication and authorization
-# --------------------------------
-
-# auth_hooks = [
-# 	"glass_ui.auth.validate"
-# ]
-
-# Translation
-# --------------------------------
-
-# Make link fields search translated document names for these DocTypes
-# Recommended only for DocTypes which have limited documents with untranslated names
-# For example: Role, Gender, etc.
-# translated_search_doctypes = []
+# Website theme
+website_theme = "glass_ui"
 
 # Boot Session
 # -------------
-# Pass boot information to client side
-
 boot_session = "glass_ui.api.boot_session"
 
 # Fixtures
 # --------
-# List of fixtures to be loaded during app installation
-
 fixtures = [
     {
         "dt": "Custom Field",
@@ -220,9 +81,22 @@ fixtures = [
 
 # Website Context
 # ---------------
-# Pass context to website templates
-
 website_context = {
     "favicon": "/assets/glass_ui/images/favicon.ico",
     "splash_image": "/assets/glass_ui/images/splash.png"
+}
+
+# Installation
+# ------------
+before_install = "glass_ui.install.before_install"
+after_install = "glass_ui.install.after_install"
+
+# Required for Frappe Cloud deployment
+required_apps = ["frappe"]
+
+# Jinja methods for template access
+jinja = {
+    "methods": [
+        "glass_ui.utils.get_glass_theme"
+    ]
 }
