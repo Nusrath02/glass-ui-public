@@ -4,7 +4,7 @@ with open("requirements.txt") as f:
     install_requires = f.read().strip().split("\n")
 
 setup(
-    name="glassn",
+    name="theme_gl",
     version="1.0.0",
     description="Custom Frappe app with glassmorphism UI design",
     author="Your Company",
