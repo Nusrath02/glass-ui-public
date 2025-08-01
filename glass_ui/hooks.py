@@ -1,6 +1,6 @@
 from . import __version__ as app_version
 
-app_name = "glass_ui"
+app_name = "glassn"
 app_title = "Glass UI"
 app_publisher = "Your Company"
 app_description = "Custom Frappe app with glassmorphism UI design"
